@@ -34,3 +34,9 @@ document.write '<div id="ember-testing-container"><div id="ember-testing"></div>
 AddressBook.rootElement = '#ember-testing'
 AddressBook.setupForTesting()
 AddressBook.injectTestHelpers()
+
+@routesTo = (url, routeName) ->
+  visit url
+  andThen ->
+    currentRouteName = AddressBook.__container__.lookup('controller:application').currentRouteName
+    equal currentRouteName, routeName, "Expected #{routeName} got: #{currentRouteName}"

@@ -1,5 +1,4 @@
 # For more information see: http://emberjs.com/guides/routing/
 
-AddressBook.Router.map ()->
-  # @resource('posts')
-
+AddressBook.Router.map () ->
+  @resource 'contacts', ->
