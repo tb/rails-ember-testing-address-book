@@ -1,0 +1,7 @@
+<h1 class="contacts_heading">Now in the Contacts Index</h1>
+
+<ul class="contacts_list">
+{{#each}}
+  <li>{{#link-to 'contacts.show' this}}{{first_name}}{{/link-to}}</li>
+{{/each}}
+</ul>

@@ -27,6 +27,8 @@
 #
 # You can require javascript files here. A good place to start is by requiring your application.js.
 #= require application
+#= require support/factories
+#= require support/helpers
 #= require_self
 
 document.write '<div id="ember-testing-container"><div id="ember-testing"></div></div>'
@@ -35,8 +37,7 @@ AddressBook.rootElement = '#ember-testing'
 AddressBook.setupForTesting()
 AddressBook.injectTestHelpers()
 
-@routesTo = (url, routeName) ->
-  visit url
-  andThen ->
-    currentRouteName = AddressBook.__container__.lookup('controller:application').currentRouteName
-    equal currentRouteName, routeName, "Expected #{routeName} got: #{currentRouteName}"
+QUnit.testStart = ->
+  AddressBook.ApplicationAdapter = DS.FixtureAdapter.extend()
+  AddressBook.Contact.FIXTURES = []
+  AddressBook.reset()

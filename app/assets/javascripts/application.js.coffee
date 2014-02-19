@@ -9,4 +9,3 @@ Ember.LOG_TRANSITIONS = true
 
 # for more details see: http://emberjs.com/guides/application/
 window.AddressBook = Ember.Application.create()
-

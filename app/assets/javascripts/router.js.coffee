@@ -2,3 +2,4 @@
 
 AddressBook.Router.map () ->
   @resource 'contacts', ->
+    @route 'show', { path: '/:contact_id' }
