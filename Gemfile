@@ -12,11 +12,17 @@ gem 'ember-source', '~>1.3.1.1'
 gem 'active_model_serializers'
 
 group :development do
+  gem 'rails-api'
   gem 'quiet_assets'
   gem 'meta_request'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rails-api'
+end
+
+group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem 'guard-teaspoon'
+  gem 'teaspoon'
 end
