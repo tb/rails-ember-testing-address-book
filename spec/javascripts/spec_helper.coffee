@@ -27,9 +27,16 @@
 #
 # You can require javascript files here. A good place to start is by requiring your application.js.
 #= require application
+#= require support/ember-mocha
 #= require support/factories
 #= require support/helpers
 #= require_self
+
+mocha.ui('bdd')
+#chai.Assertion.includeStack = true
+chai.should()
+
+Ember.Test.adapter = Ember.Test.MochaAdapter.create()
 
 document.write '<div id="ember-testing-container"><div id="ember-testing"></div></div>'
 
@@ -37,7 +44,7 @@ AddressBook.rootElement = '#ember-testing'
 AddressBook.setupForTesting()
 AddressBook.injectTestHelpers()
 
-QUnit.testStart = ->
+beforeEach ->
   AddressBook.ApplicationAdapter = DS.FixtureAdapter.extend()
   AddressBook.Contact.FIXTURES = []
   AddressBook.reset()
