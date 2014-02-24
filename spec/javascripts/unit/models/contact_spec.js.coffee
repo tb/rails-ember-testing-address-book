@@ -1,9 +1,5 @@
-module 'unit/models/contact',
-  setup: ->
+describe 'Contact', ->
 
-  teardown: ->
-    AddressBook.reset()
+  it '#first_name', -> hasAttribute 'Contact', 'first_name', 'string'
 
-test 'attributes', ->
-  hasAttribute 'Contact', 'first_name', 'string'
-  hasAttribute 'Contact', 'last_name', 'string'
+  it '#last_name',  -> hasAttribute 'Contact', 'last_name', 'string'

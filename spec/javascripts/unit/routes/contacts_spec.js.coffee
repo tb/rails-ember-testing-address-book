@@ -1,11 +1,9 @@
-module 'Routing unit',
+describe 'Routing', ->
 
-test 'root', ->
-  routesTo '/', 'index'
+  it '/', -> routesTo '/', 'index'
 
-test '/contacts', ->
-  routesTo '/contacts', 'contacts.index'
+  it '/contacts', -> routesTo '/contacts', 'contacts.index'
 
-test '/contacts/1', ->
-  create('contact').then (contact) ->
-    routesTo "/contacts/#{contact.id}", 'contacts.show'
+  it '/contacts/1', ->
+    create('contact').then (contact) ->
+      routesTo "/contacts/#{contact.id}", 'contacts.show'
