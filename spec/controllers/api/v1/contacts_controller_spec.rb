@@ -10,12 +10,11 @@ describe Api::V1::ContactsController do
     before { call_request }
 
     it 'response status is 200' do
-      expect(response.status).to eq(200)
+      expect(response.status).to eq 200
     end
 
     it 'responds with contacts' do
-      expect(json).to have_key('contacts')
-      expect(json['contacts'].size).to eq(2)
+      expect(json['contacts'].size).to eq 2
     end
   end
 
@@ -59,12 +58,12 @@ describe Api::V1::ContactsController do
 
       it 'response status is 422' do
         call_request
-        expect(response.status).to eq(422)
+        expect(response.status).to eq 422
       end
 
       it 'response with errors' do
         call_request
-        expect(json).to have_key('errors')
+        expect(json).to have_key 'errors'
       end
     end
   end
@@ -87,7 +86,7 @@ describe Api::V1::ContactsController do
 
       it 'response status is 422' do
         call_request
-        expect(response.status).to eq(422)
+        expect(response.status).to eq 422
       end
 
       it 'response with errors' do
@@ -112,7 +111,7 @@ describe Api::V1::ContactsController do
 
     it 'responds with contact' do
       call_request
-      expect(response.status).to eq(204)
+      expect(response.status).to eq 204
     end
   end
 end
