@@ -14,7 +14,7 @@ describe Api::V1::ContactsController do
     end
 
     it 'responds with contacts' do
-      expect(json['contacts'].size).to eq 2
+      expect(json['contacts']).to have(2).items
     end
   end
 
@@ -39,14 +39,16 @@ describe Api::V1::ContactsController do
       expect{call_request}.to change{Contact.count}.by 1
     end
 
-    it 'response status is 200' do
-      call_request
-      expect(response.status).to eq 200
-    end
+    context 'after request' do
+      before { call_request }
 
-    it 'responds with contact' do
-      call_request
-      expect(json).to have_key 'contact'
+      it 'response status is 200' do
+        expect(response.status).to eq 200
+      end
+
+      it 'responds with contact' do
+        expect(json).to have_key 'contact'
+      end
     end
 
     context 'validation fails' do
@@ -56,14 +58,16 @@ describe Api::V1::ContactsController do
         expect{call_request}.to change{Contact.count}.by 0
       end
 
-      it 'response status is 422' do
-        call_request
-        expect(response.status).to eq 422
-      end
+      context 'after request' do
+        before { call_request }
 
-      it 'response with errors' do
-        call_request
-        expect(json).to have_key 'errors'
+        it 'response status is 422' do
+          expect(response.status).to eq 422
+        end
+
+        it 'response with errors' do
+          expect(json).to have_key 'errors'
+        end
       end
     end
   end
@@ -84,19 +88,20 @@ describe Api::V1::ContactsController do
         expect{call_request}.not_to change{contact.reload.first_name}.to 'Bob'
       end
 
-      it 'response status is 422' do
-        call_request
-        expect(response.status).to eq 422
-      end
+      context 'after request' do
+        before { call_request }
 
-      it 'response with errors' do
-        call_request
-        expect(json).to have_key('errors')
-      end
+        it 'response status is 422' do
+          expect(response.status).to eq 422
+        end
 
-      it 'response errors includes first_name' do
-        call_request
-        expect(json['errors'].keys).to include 'first_name'
+        it 'response with errors' do
+          expect(json).to have_key('errors')
+        end
+
+        it 'response errors includes first_name' do
+          expect(json['errors'].keys).to include 'first_name'
+        end
       end
     end
   end
@@ -109,9 +114,12 @@ describe Api::V1::ContactsController do
       expect{call_request}.to change{Contact.count}.by -1
     end
 
-    it 'responds with contact' do
-      call_request
-      expect(response.status).to eq 204
+    context 'after request' do
+      before { call_request }
+
+      it 'responds with contact' do
+        expect(response.status).to eq 204
+      end
     end
   end
 end
